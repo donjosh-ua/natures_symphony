@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="navegacion">
+    <file>historial.png</file>
+    <file>capturar.png</file>
+    <file>chat.png</file>
+    <file>trivia.png</file>
+    <file>wiki.png</file>
+  </qresource>
+</RCC>
