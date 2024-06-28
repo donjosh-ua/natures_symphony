@@ -7,6 +7,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+from controller.animatedLabel import AnimatedClickableLabel
 
 class Ui_NuevoRegistro(object):
     def setupUi(self, NuevoRegistro):
@@ -54,9 +55,9 @@ class Ui_NuevoRegistro(object):
         self.frameLayout.addWidget(self.labelAcercar)
         
         # Agregar señal
-        self.labelSenal = QtWidgets.QLabel(self.frame)
-        self.labelSenal.setFixedSize(181, 181)
-        self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 90px; border: 2px")
+        self.labelSenal = AnimatedClickableLabel(self.frame)
+        self.labelSenal.setFixedSize(200, 200)
+        self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px; border: 2px")
         self.labelSenal.setAlignment(QtCore.Qt.AlignCenter)
         self.labelSenal.setObjectName("labelSenal")
         self.frameLayout.addWidget(self.labelSenal, alignment=QtCore.Qt.AlignCenter)
@@ -106,7 +107,7 @@ class Ui_NuevoRegistro(object):
         iconChat = QtGui.QIcon()
         iconChat.addPixmap(QtGui.QPixmap("./assets/images/chat.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnChat.setIcon(iconChat)
-        self.btnChat.setIconSize(QtCore.QSize(40, 40))
+        self.btnChat.setIconSize(QtCore.QSize(50, 50))
         self.btnChat.setText("")
         self.btnChat.setObjectName("btnChat")
         self.navLayout.addWidget(self.btnChat)
@@ -117,7 +118,7 @@ class Ui_NuevoRegistro(object):
         iconTrivia = QtGui.QIcon()
         iconTrivia.addPixmap(QtGui.QPixmap("./assets/images/trivia.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.b.setIcon(iconTrivia)
-        self.b.setIconSize(QtCore.QSize(40, 40))
+        self.b.setIconSize(QtCore.QSize(50, 50))
         self.b.setText("")
         self.b.setObjectName("b")
         self.navLayout.addWidget(self.b)
@@ -128,7 +129,7 @@ class Ui_NuevoRegistro(object):
         iconCapturar = QtGui.QIcon()
         iconCapturar.addPixmap(QtGui.QPixmap("./assets/images/capturar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnCapturar.setIcon(iconCapturar)
-        self.btnCapturar.setIconSize(QtCore.QSize(40, 40))
+        self.btnCapturar.setIconSize(QtCore.QSize(50, 50))
         self.btnCapturar.setText("")
         self.btnCapturar.setObjectName("btnCapturar")
         self.navLayout.addWidget(self.btnCapturar)
@@ -139,7 +140,7 @@ class Ui_NuevoRegistro(object):
         iconWiki = QtGui.QIcon()
         iconWiki.addPixmap(QtGui.QPixmap("./assets/images/wiki.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_7.setIcon(iconWiki)
-        self.pushButton_7.setIconSize(QtCore.QSize(40, 40))
+        self.pushButton_7.setIconSize(QtCore.QSize(50, 50))
         self.pushButton_7.setText("")
         self.pushButton_7.setObjectName("pushButton_7")
         self.navLayout.addWidget(self.pushButton_7)
@@ -150,7 +151,7 @@ class Ui_NuevoRegistro(object):
         iconHistorial = QtGui.QIcon()
         iconHistorial.addPixmap(QtGui.QPixmap("./assets/images/historial.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_8.setIcon(iconHistorial)
-        self.pushButton_8.setIconSize(QtCore.QSize(40, 40))
+        self.pushButton_8.setIconSize(QtCore.QSize(50, 50))
         self.pushButton_8.setText("")
         self.pushButton_8.setObjectName("pushButton_8")
         self.navLayout.addWidget(self.pushButton_8)

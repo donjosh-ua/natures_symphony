@@ -1,15 +1,7 @@
 from PyQt5 import QtWidgets
-from view.defaultView import Ui_NuevoRegistro
+from controller.capturarController import MainWindow
 import sys
 
-
-class MainWindow(QtWidgets.QMainWindow, Ui_NuevoRegistro):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    mainWin = MainWindow()
-    mainWin.show()
-    sys.exit(app.exec_())
+app = QtWidgets.QApplication(sys.argv)
+mainWin = MainWindow()
+sys.exit(app.exec_())
