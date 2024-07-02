@@ -50,7 +50,7 @@
     <widget class="QFrame" name="frameNavegacion">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>-10</x>
        <y>510</y>
        <width>451</width>
        <height>101</height>

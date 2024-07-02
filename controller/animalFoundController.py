@@ -1,5 +1,5 @@
 from view.ViewAnimalFound import Ui_NuevoRegistro
-from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore, QtGui
 import sys
 
 class AnimalFoundController(QtWidgets.QMainWindow, Ui_NuevoRegistro):
