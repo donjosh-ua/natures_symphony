@@ -1,8 +1,9 @@
 import numpy as np
-from io import BytesIO
 import sounddevice as sd
+from io import BytesIO
 from pydub import AudioSegment
 from PyQt5.QtCore import QThread, pyqtSignal
+
 
 class Audio(QThread):
     # Instancia necesaria para mandar el audio al hilo principal de la aplicacion
@@ -27,14 +28,19 @@ class Audio(QThread):
         return audio_wav
     
     def run(self):
+
         #Frecuencia de muestreo usada
         fs = 44100
+
         #Duracion del audio
         seconds = 8
+        
         #Grabar el audio
         audio_data = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+        
         #El hilo secundaria donde se esta grabando el audio espera que acabe con la grabacion
         sd.wait()
+        
         #Se devulve el resultado al hilo principal
         self.audio_recorded.emit(audio_data)
         
