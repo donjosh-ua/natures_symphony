@@ -1,8 +1,8 @@
-from view.Animal import Ui_Animal
+from view.Ui_Animal import Ui_Animal
 from PyQt5 import QtWidgets, QtCore, QtGui
 import sys
 
-class AnimalFoundController(QtWidgets.QMainWindow, Ui_Animal):
+class AnimalController(QtWidgets.QMainWindow, Ui_Animal):
     #Variable Global para saber si el usuario ya presionó el botón de play
     flagPressed = False
 

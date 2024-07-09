@@ -2,15 +2,16 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import pyqtSlot
 import numpy as np
-from view.Registro import Ui_Registro
+from view.Ui_Registro import Ui_Registro
 from model.Audio import Audio
 
-class MainWindow(QtWidgets.QMainWindow, Ui_Registro):
+class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.initWindow()
         self.initAction()
+        print("Entro")
         self.show()
         self.audio_thread = None
 

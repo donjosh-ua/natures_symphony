@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QLabel
 from PyQt5.QtCore import QTimer, pyqtSignal, QPointF
 from PyQt5.QtGui import QPainter, QPen, QColor
 
-class AnimatedClickableLabel(QLabel):
+class AnimatedController(QLabel):
     pressed = pyqtSignal()
     released = pyqtSignal()
 
