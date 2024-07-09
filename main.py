@@ -1,10 +1,10 @@
 from PyQt5 import QtWidgets
-from controller.capturarController import MainWindow
-from controller.animalFoundController import AnimalFoundController
+from controller.RegistroController import RegistroController
+from controller.AnimalController import AnimalController
 import sys
 
 app = QtWidgets.QApplication(sys.argv)
-mainWin = MainWindow()
-#viewAnimalFound = AnimalFoundController()
+mainWin = RegistroController()
+#viewAnimalFound = AnimalController()
 sys.exit(app.exec())
 
