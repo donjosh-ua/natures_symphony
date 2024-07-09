@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_NuevoRegistro(object):
+class Ui_Animal(object):
     def setupUi(self, NuevoRegistro):
         NuevoRegistro.setObjectName("NuevoRegistro")
         NuevoRegistro.resize(453, 611)

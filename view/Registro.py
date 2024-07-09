@@ -9,7 +9,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from controller.animatedLabel import AnimatedClickableLabel
 
-class Ui_NuevoRegistro(object):
+class Ui_Registro(object):
     def setupUi(self, NuevoRegistro):
         NuevoRegistro.setObjectName("NuevoRegistro")
         NuevoRegistro.resize(455, 622)

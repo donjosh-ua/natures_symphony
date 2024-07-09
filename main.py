@@ -4,7 +4,7 @@ from controller.animalFoundController import AnimalFoundController
 import sys
 
 app = QtWidgets.QApplication(sys.argv)
-mainWin = MainWindow()
-#viewAnimalFound = AnimalFoundController()
+#mainWin = MainWindow()
+viewAnimalFound = AnimalFoundController()
 sys.exit(app.exec())
 
