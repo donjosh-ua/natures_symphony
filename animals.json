@@ -1,0 +1,67 @@
+{
+    "animals": [
+        {
+            "nombre": "León",
+            "imagen": "./assets/images/leon.jpg",
+            "descripción": "El león es un mamífero carnívoro con un tono amarillo anaranjado.",
+            "habitat": "Sabanas, praderas y matorrales abiertos de África subsahariana.",
+            "dieta": "Carnívoro, se alimenta principalmente de ungulados grandes.",
+            "especie": "Panthera leo",
+            "sonido": "audios/leon/leon.wav"
+        },
+        {
+            "nombre": "Elefante",
+            "imagen": "./assets/images/elefante.jpg",
+            "descripción": "El elefante es el mamífero terrestre más grande que existe.",
+            "habitat": "Sabanas, bosques y selvas de África y Asia.",
+            "dieta": "Herbívoro, se alimenta de hojas, frutas, cortezas y raíces.",
+            "especie": "Elephantidae",
+            "sonido": "audios/elefante/elefante.wav"
+        },
+        {
+            "nombre": "Jirafa",
+            "imagen": "./assets/images/jirafa.jpg",
+            "descripción": "La jirafa es el mamífero más alto del mundo.",
+            "habitat": "Sabanas, praderas y bosques de África.",
+            "dieta": "Herbívoro, se alimenta de hojas, frutas y cortezas.",
+            "especie": "Giraffa camelopardalis",
+            "sonido": "audios/jirafa/jirafa.wav"
+        },
+        {
+            "nombre": "Tigre",
+            "imagen": "./assets/images/tigre.jpg",
+            "descripción": "El tigre es un mamífero carnívoro con un pelaje anaranjado con rayas negras.",
+            "habitat": "Selvas, bosques y manglares de Asia.",
+            "dieta": "Carnívoro, se alimenta principalmente de ungulados grandes.",
+            "especie": "Panthera tigris",
+            "sonido": "audios/tigre/tigre.wav"
+        },
+        {
+            "nombre": "Perro",
+            "imagen": "./assets/images/perro.jpg",
+            "descripción": "El perro es un mamífero carnívoro domesticado por el ser humano.",
+            "habitat": "Hogares y ciudades de todo el mundo.",
+            "dieta": "Omnívoro, se alimenta de carne, vegetales y frutas.",
+            "especie": "Canis lupus familiaris",
+            "sonido": "audios/dog/perro.wav"
+        },
+        {
+            "nombre": "Gato",
+            "imagen": "./assets/images/gato.jpg",
+            "descripción": "El gato es un mamífero carnívoro domesticado por el ser humano.",
+            "habitat": "Hogares y ciudades de todo el mundo.",
+            "dieta": "Carnívoro, se alimenta de carne y pescado.",
+            "especie": "Felis catus",
+            "sonido": "audios/cat/gato.wav"
+        },
+        {
+            "nombre": "Gallina",
+            "imagen": "./assets/images/gallina.jpg",
+            "descripción": "La gallina es un ave domesticada por el ser humano.",
+            "habitat": "Granjas y corrales de todo el mundo.",
+            "dieta": "Omnívoro, se alimenta de semillas, insectos y vegetales.",
+            "especie": "Gallus gallus domesticus",
+            "sonido": "audios/chicken/gallina.wav"
+        }
+    ]
+}
