@@ -1,7 +1,7 @@
 from pickle import dump
 import os
 from scipy.io.wavfile import read
-import controller.fingerprint as fngp
+import controller.Procesamiento as fngp
 from os import remove
 
 

@@ -3,7 +3,6 @@ from scipy import signal
 from scipy.io.wavfile import read
 import json
 import numpy as np
-import controller.fingerprint as fngp
 
 
 class Procesamiento:
@@ -50,8 +49,8 @@ class Procesamiento:
             print("Database or audio index file not found.")
             return []
         
-        constellation = fngp.create_constellation(audio_input, Fs)
-        hashes = fngp.create_hashes(constellation, None)
+        constellation = Procesamiento.create_constellation(audio_input, Fs)
+        hashes = Procesamiento.create_hashes(constellation, None)
         scores = Procesamiento.score_hashes_against_database(hashes, database)
         total_score = sum(score[1][1] for score in scores)
 
@@ -74,28 +73,6 @@ class Procesamiento:
         
         # If no animal is found
         return None
-
-    @classmethod
-    def print_matches(cls, file_name, num_matches=1):
-        
-        try:
-            database = load(open('database.dat', 'rb'))
-            audio_name_index = load(open('audio_index.dat', 'rb'))
-        except FileNotFoundError:
-            pass
-
-        Fs, audio_input = read(file_name)
-        constellation = fngp.create_constellation(audio_input, Fs)
-        hashes = fngp.create_hashes(constellation, None)
-
-        scores = cls.score_hashes_against_database(hashes, database)[:num_matches]
-        print(f'Audio con mayor parecido\n{audio_name_index[scores.pop(0)[0]].split("/")[-1]}')
-        if num_matches == 1:
-            return
-        
-        print('Otras coincidencias')
-        for audio_id, _ in scores:
-            print(f"{audio_name_index[audio_id].split('/')[-1]}")
 
     @classmethod
     def create_constellation(audio, Fs, window_length=0.5, num_peaks=12):

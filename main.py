@@ -1,10 +1,9 @@
+import sys
 from PyQt5 import QtWidgets
 from controller.RegistroController import RegistroController
 from controller.AnimalController import AnimalController
-import sys
 from controller.Procesamiento import Procesamiento
 from scipy.io.wavfile import read
-
 
 
 if __name__ == '__main__':
