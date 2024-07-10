@@ -4,6 +4,8 @@ from PyQt5.QtCore import pyqtSlot
 import numpy as np
 from view.Ui_Registro import Ui_Registro
 from model.Audio import Audio
+from controller.AnimalController import AnimalController
+from controller.Procesamiento import Procesamiento
 
 class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
     def __init__(self):
@@ -11,6 +13,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.setupUi(self)
         self.initWindow()
         self.initAction()
+        self.btnAceptarCaptura.clicked.connect(self.playbuttonAccept)
         print("Entro")
         self.show()
         self.audio_thread = None
@@ -52,10 +55,16 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: none;")
         self.btnAlmacenamiento.hide()
 
+    def playbuttonAccept(self):
+        # Abrimos la ventana de AnimalController
+        self.animal_controller = AnimalController()
+        self.animal_controller.show()
+
     @pyqtSlot(np.ndarray)
     def on_audio_recorded(self, audio_data):
-        self.input_audio = audio_data
+        self.input_audio = audio_data 
         
     def pressPlay(self):
         # Creamos una señal que queremos que se muestre en el label por 8 segundos por ahora
         self.labelSenal.startAnimation(6)
+        #hola perro :
