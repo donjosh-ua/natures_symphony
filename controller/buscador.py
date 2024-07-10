@@ -36,7 +36,7 @@ def score_hashes_against_database(hashes, database):
     
     return scores
 
-def get_audio_probabilities(audio_input, Fs):
+def find_animal(audio_input, Fs):
 
     try:
         database = load(open('database.dat', 'rb'))
@@ -53,9 +53,9 @@ def get_audio_probabilities(audio_input, Fs):
     if total_score == 0:
         return [("No matches found", 1.0)]
 
-    return find_animal(scores[0][0])
+    return get_animal_info(scores[0][0])
 
-def find_animal(animal_name):
+def get_animal_info(animal_name):
 
     # Load the JSON data
     with open('./animals.json', 'r', encoding='utf-8') as file:

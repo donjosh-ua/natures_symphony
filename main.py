@@ -9,14 +9,6 @@ import controller.buscador as buscador
 
 if __name__ == '__main__':
     # app = QtWidgets.QApplication(sys.argv)
-    # mainWin = RegistroController()
-    #viewAnimalFound = AnimalController()
+    mainWin = RegistroController()
+    # viewAnimalFound = AnimalController()
     # sys.exit(app.exec())
-
-    # db = Database()
-    # db.drop_db()
-    # db.load_db('audios')
-    # db.save_db()
-
-    Fs, input = read('dog_example.wav')
-    print(buscador.get_audio_probabilities(input, Fs))
