@@ -1,11 +1,11 @@
+import threading
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtCore import pyqtSlot
-import numpy as np
-from view.Ui_Registro import Ui_Registro
 from model.Audio import Audio
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import QFileDialog
+from view.Ui_Registro import Ui_Registro
 from controller.AnimalController import AnimalController
-from controller.Procesamiento import Procesamiento
+
 
 class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
     def __init__(self):
@@ -13,10 +13,10 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.setupUi(self)
         self.initWindow()
         self.initAction()
-        self.btnAceptarCaptura.clicked.connect(self.playbuttonAccept)
-        print("Entro")
+        
         self.show()
         self.audio_thread = None
+        self.input_audio_path = None  
 
     def initWindow(self):
         self.setWindowTitle("Nature's Symphony")
@@ -26,11 +26,12 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.btnPlay.clicked.connect(self.pressPlay)
         self.labelSenal.pressed.connect(self.pressMicro)
         self.btnAlmacenamiento.clicked.connect(self.selectAudioFile)
+        self.btnAceptarCaptura.clicked.connect(self.playbuttonAccept)
 
     def selectAudioFile(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo de audio", "", "Audio Files (*.mp3 *.flac *.ogg *.wav *.aac *.wma)") 
         if file_path:   
-            self.input_audio = Audio().convert_audio_to_wav(file_path)
+            self.input_audio_path = Audio().convert_audio_to_wav(file_path)
             self.showComponents()
         
     def hideComponents(self):
@@ -41,17 +42,17 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
 
     def pressMicro(self):
         self.showComponents()
-        #Mostrar onda de audio para indicar que se esta comenzando la grabacion del audio
-        self.pressPlay()
-        #Inicializar hilo secundario para realizar grabacion
-        self.audio_thread = Audio()
-        #Se indica accion a relizar en el hilo secundario
-        self.audio_thread.audio_recorded.connect(self.on_audio_recorded)
+        self.input_audio_path = "./assets/output_audio.wav"
+        # Mostrar onda de audio para indicar que se esta comenzando la grabacion del audio
+        self.labelSenal.startAnimation(8)
+        self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio().grabar_audio, args = ())
         self.audio_thread.start()
 
     def showComponents(self):
+        self.btnPlay.show()
         self.labelAcercar.show()
         self.btnAceptarCaptura.show()
+        self.labelSenal.pressed.disconnect(self.pressMicro)
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: none;")
         self.btnAlmacenamiento.hide()
 
@@ -59,12 +60,11 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         # Abrimos la ventana de AnimalController
         self.animal_controller = AnimalController()
         self.animal_controller.show()
-
-    @pyqtSlot(np.ndarray)
-    def on_audio_recorded(self, audio_data):
-        self.input_audio = audio_data 
         
     def pressPlay(self):
         # Creamos una señal que queremos que se muestre en el label por 8 segundos por ahora
-        self.labelSenal.startAnimation(6)
-        #hola perro :
+        print(self.input_audio_path)
+        if self.input_audio_path:
+            self.labelSenal.startAnimation(8)
+            self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio().play_audio, args = (self.input_audio_path,))
+            self.audio_thread.start()
