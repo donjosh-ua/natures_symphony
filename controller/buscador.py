@@ -1,6 +1,7 @@
 from pickle import load
+import json
 from scipy.io.wavfile import read
-import fingerprint as fngp
+import controller.fingerprint as fngp
 
 
 def score_hashes_against_database(hashes, database):
@@ -43,19 +44,31 @@ def get_audio_probabilities(audio_input, Fs):
     except FileNotFoundError:
         print("Database or audio index file not found.")
         return []
-
+    
     constellation = fngp.create_constellation(audio_input, Fs)
     hashes = fngp.create_hashes(constellation, None)
-
     scores = score_hashes_against_database(hashes, database)
     total_score = sum(score[1][1] for score in scores)
 
     if total_score == 0:
         return [("No matches found", 1.0)]
 
-    probabilities = [(audio_name_index[audio_id].split("/")[-1], score[1][1] / total_score) for audio_id, score in scores]
+    return find_animal(scores[0][0])
 
-    return probabilities
+def find_animal(animal_name):
+
+    # Load the JSON data
+    with open('./animals.json', 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    
+    # Search for the animal
+    for animal in data['animals']:
+        if animal['nombre'].lower() == animal_name.lower():
+            return animal
+    
+    # If no animal is found
+    return None
+
 
 def print_matches(file_name, num_matches=1):
     
@@ -76,4 +89,4 @@ def print_matches(file_name, num_matches=1):
     
     print('Otras coincidencias')
     for audio_id, _ in scores:
-        print(f"{audio_name_index[audio_id].split("/")[-1]}")
+        print(f"{audio_name_index[audio_id].split('/')[-1]}")

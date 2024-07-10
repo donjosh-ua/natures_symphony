@@ -1,7 +1,7 @@
 from pickle import dump
 import os
 from scipy.io.wavfile import read
-import fingerprint as fngp
+import controller.fingerprint as fngp
 from os import remove
 
 
@@ -9,14 +9,14 @@ class Database:
 
     def __init__(self):
         self.database = {}
-        self.song_name_index = {}
+        self.audio_name_index = {}
         self.db_name = 'database.dat'
-        self.song_index_name = 'song_index.dat'
+        self.audio_index_name = 'audio_index.dat'
 
     def drop_db(self):
         try:
             remove(self.db_name)
-            remove(self.song_index_name)
+            remove(self.audio_index_name)
         except FileNotFoundError:
             pass
 
@@ -24,12 +24,12 @@ class Database:
         with open(self.db_name, 'wb') as db:
             dump(self.database, db, 5)
 
-        with open(self.song_index_name, 'wb') as songs:
-            dump(self.song_name_index, songs, 5)
+        with open(self.audio_index_name, 'wb') as audios:
+            dump(self.audio_name_index, audios, 5)
 
     def load_db(self, folder: str):
         
-        self.song_name_index = {}
+        self.audio_name_index = {}
         self.database = {}
         
         for root, _, files in os.walk(folder):
@@ -41,6 +41,11 @@ class Database:
 
                 full_path = os.path.join(root, file)
                 animal_name = os.path.basename(root)  # This is the animal's name
+
+                if animal_name not in self.audio_name_index:
+                    self.audio_name_index[animal_name] = []
+                self.audio_name_index[animal_name].append(file)
+                
                 print(f'Processing {animal_name}/{file}...')
 
                 # Read the audio file

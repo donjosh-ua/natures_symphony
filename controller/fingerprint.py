@@ -3,7 +3,8 @@ from scipy import signal
 
 
 def create_constellation(audio, Fs, window_length=0.5, num_peaks=12):
-    #Determina si el audio esta en uno o dos canales
+    
+    # Determina si el audio esta en uno o dos canales
     if audio.ndim == 1 :
         audio = audio.reshape(-1)
     else :
