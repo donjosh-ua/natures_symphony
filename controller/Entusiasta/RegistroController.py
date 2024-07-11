@@ -1,11 +1,11 @@
 import threading
 from PyQt5 import QtWidgets, QtCore
-from model.Audio import Audio
+from model.Procesamiento.Audio import Audio
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QFileDialog
 from view.Ui_Registro import Ui_Registro
-from controller.AnimalController import AnimalController
-from controller.Procesamiento import Procesamiento
+from controller.Entusiasta.AnimalController import AnimalController
+from model.Procesamiento.Procesamiento import Procesamiento
 from pydub import AudioSegment
 
 
@@ -48,8 +48,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
             # Si ocurre un error, mostrar un pop up indicando que el archivo está corrupto
             msg = QtWidgets.QMessageBox()
             msg.setIcon(QtWidgets.QMessageBox.Critical)
-            msg.setText("Problemas con el audio ingresado!")
-            msg.setInformativeText(str(e))
+            msg.setText("Problemas con el audio ingresado")
             msg.setWindowTitle("Error")
             msg.exec_()
             return
@@ -99,6 +98,15 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
 
 
     def playbuttonAccept(self):
+
+        if Procesamiento.find_animal(Audio.audio[1]) is None:
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.information)
+            msg.setText("No se han encontrado coincidencias")
+            msg.setWindowTitle("Información")
+            msg.exec_()
+            return
+        
         self.animal_controller = AnimalController()
         self.animal_controller.set_json_data(Procesamiento.find_animal(Audio.audio[1]))
 

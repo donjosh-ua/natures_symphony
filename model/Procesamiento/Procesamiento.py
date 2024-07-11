@@ -42,8 +42,6 @@ class Procesamiento:
     @staticmethod
     def find_animal(audio_input, Fs=44100):
 
-        print(audio_input)
-
         try:
             database = load(open('database.dat', 'rb'))
             audio_name_index = load(open('audio_index.dat', 'rb'))
@@ -57,7 +55,7 @@ class Procesamiento:
         total_score = sum(score[1][1] for score in scores)
 
         if total_score == 0:
-            return [("No matches found", 1.0)]
+            return None
 
         return Procesamiento.get_animal_info(scores[0][0])
 

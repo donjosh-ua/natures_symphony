@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtWidgets
-from controller.RegistroController import RegistroController
+from controller.Entusiasta.RegistroController import RegistroController
 
 
 if __name__ == '__main__':
