@@ -61,7 +61,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.btnPlay.hide()
         self.labelAcercar.hide()
         self.btnAceptarCaptura.hide()
-        self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: url(./assets/images/microfono-de-estudio.png);")
+        self.showMicrophoneImage()
     
 
     def pressMicro(self):
@@ -93,7 +93,6 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
 
 
     def playbuttonAccept(self):
-
         self.animal_controller = AnimalController()
         self.animal_controller.set_json_data(Procesamiento.find_animal(Audio.audio[1]))
 
