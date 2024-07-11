@@ -89,7 +89,11 @@ class Ui_Registro(object):
         self.btnAceptarCaptura.setStyleSheet("background: rgb(0, 0, 0); color: rgb(255, 255, 255)")
         self.btnAceptarCaptura.setObjectName("btnAceptarCaptura")
         self.frameLayout.addWidget(self.btnAceptarCaptura, alignment=QtCore.Qt.AlignCenter)
-        
+        self.btnRegresarPrincipal = QtWidgets.QPushButton(self.frame)
+        self.btnRegresarPrincipal.setStyleSheet("background: rgb(255, 102, 102); color: rgb(255, 255, 255)")
+        self.btnRegresarPrincipal.setObjectName("btnRegresarPrincipal")
+        self.frameLayout.addWidget(self.btnRegresarPrincipal, alignment=QtCore.Qt.AlignCenter)
+
         # Agregar frame de navegación
         self.frameNavegacion = QtWidgets.QFrame(self.frame)
         self.frameNavegacion.setStyleSheet("Background: white; border-top: 1px solid #E5E7E9;")
@@ -184,3 +188,4 @@ class Ui_Registro(object):
         self.labelAcercar.setText(_translate("NuevoRegistro", "Acerca el dispositivo \nlo suficiente a la fuente de audio"))
         self.btnAlmacenamiento.setText(_translate("NuevoRegistro", "Ingresar desde almacenamiento"))
         self.btnAceptarCaptura.setText(_translate("NuevoRegistro", "Aceptar"))
+        self.btnRegresarPrincipal.setText(_translate("NuevoRegistro", "Regresar"))

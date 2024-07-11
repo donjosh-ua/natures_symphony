@@ -28,6 +28,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.pressed.connect(self.pressMicro)
         self.btnAlmacenamiento.clicked.connect(self.selectAudioFile)
         self.btnAceptarCaptura.clicked.connect(self.playbuttonAccept)
+        self.btnRegresarPrincipal.clicked.connect(self.pushReturn)
 
     def selectAudioFile(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo de audio", "", "Audio Files (*.mp3 *.flac *.ogg *.wav *.aac *.wma)") 
@@ -61,6 +62,9 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.btnPlay.hide()
         self.labelAcercar.hide()
         self.btnAceptarCaptura.hide()
+        self.btnRegresarPrincipal.hide()
+        self.btnAlmacenamiento.show()
+        self.labelSenal.pressed.connect(self.pressMicro)
         self.showMicrophoneImage()
     
 
@@ -81,12 +85,14 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelAcercar.show()
         self.btnAceptarCaptura.show()
         self.labelSenal.pressed.disconnect(self.pressMicro)
+        self.btnRegresarPrincipal.show()
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: none;")
         self.btnAlmacenamiento.hide()
 
     def showComponents2(self):
         self.btnPlay.show()
         self.btnAceptarCaptura.show()
+        self.btnRegresarPrincipal.show()
         self.labelSenal.pressed.disconnect(self.pressMicro)
         self.showMicrophoneImage()
         self.btnAlmacenamiento.hide()
@@ -98,6 +104,9 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
 
         # Abrimos la ventana de AnimalController
         self.animal_controller.show()
+    
+    def pushReturn(self):
+        self.hideComponents()
         
     def pressPlay(self):        
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: None;")
