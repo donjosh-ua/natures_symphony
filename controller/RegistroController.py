@@ -1,5 +1,5 @@
 import threading
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from model.Audio import Audio
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QFileDialog
@@ -45,13 +45,16 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: url(./assets/images/microfono-de-estudio.png);")
 
     def pressMicro(self):
-
         self.showComponents()
         
         # Mostrar onda de audio para indicar que se esta comenzando la grabacion del audio
         self.labelSenal.startAnimation(5)
         self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio.grabar_audio, args = ())
         self.audio_thread.start()
+        QtCore.QTimer.singleShot(5000, self.showMicrophoneImage)
+    
+    def showMicrophoneImage(self):
+        self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px; image: url(./assets/images/microfono-de-estudio.png);")
 
     def showComponents(self):
         self.btnPlay.show()
@@ -70,7 +73,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.animal_controller.show()
         
     def pressPlay(self):        
-        
+        self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: None;")
         # Si no se ha grabado ningun audio
         if Audio.audio is None:
             print("No se ha grabado ningun audio")
@@ -79,3 +82,4 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.startAnimation(5)
         self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio.play_audio, args = ())
         self.audio_thread.start()
+        QtCore.QTimer.singleShot(5000, self.showMicrophoneImage)
