@@ -161,7 +161,7 @@ class Ui_Animal(object):
         font.setWeight(50)
         self.txtDescripcion.setFont(font)
         self.txtDescripcion.setStyleSheet("border: none;\n"
-"font: 9pt \"MS Shell Dlg 2\";\n"
+"font: 8pt \"MS Shell Dlg 2\";\n"
 "color: rgb(0, 0, 0);")
         self.txtDescripcion.setObjectName("txtDescripcion")
         self.txtHabitat = QtWidgets.QTextBrowser(self.frame_2)
@@ -174,7 +174,7 @@ class Ui_Animal(object):
         font.setWeight(50)
         self.txtHabitat.setFont(font)
         self.txtHabitat.setStyleSheet("border: none;\n"
-"font: 9pt \"MS Shell Dlg 2\";\n"
+"font: 8pt \"MS Shell Dlg 2\";\n"
 "color: rgb(0, 0, 0);")
         self.txtHabitat.setObjectName("txtHabitat")
         self.txtEspecies = QtWidgets.QTextBrowser(self.frame_2)
@@ -187,7 +187,7 @@ class Ui_Animal(object):
         font.setWeight(50)
         self.txtEspecies.setFont(font)
         self.txtEspecies.setStyleSheet("border: none;\n"
-"font: 9pt \"MS Shell Dlg 2\";\n"
+"font: 8pt \"MS Shell Dlg 2\";\n"
 "color: rgb(0, 0, 0);")
         self.txtEspecies.setObjectName("txtEspecies")
         self.txtDieta = QtWidgets.QTextBrowser(self.frame_2)
@@ -200,7 +200,7 @@ class Ui_Animal(object):
         font.setWeight(50)
         self.txtDieta.setFont(font)
         self.txtDieta.setStyleSheet("border: none;\n"
-"font: 9pt \"MS Shell Dlg 2\";\n"
+"font: 8pt \"MS Shell Dlg 2\";\n"
 "color: rgb(0, 0, 0);")
         self.txtDieta.setObjectName("txtDieta")
         self.btnPlay = QtWidgets.QPushButton(self.frame_2)
