@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QFileDialog
 from view.Ui_Registro import Ui_Registro
 from controller.AnimalController import AnimalController
 from controller.Procesamiento import Procesamiento
+from pydub import AudioSegment
 
 
 class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
@@ -29,20 +30,39 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.btnAceptarCaptura.clicked.connect(self.playbuttonAccept)
 
     def selectAudioFile(self):
-
         file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo de audio", "", "Audio Files (*.mp3 *.flac *.ogg *.wav *.aac *.wma)") 
         
         if file_path == "" or file_path is None:
             return
-           
+        
+        # Verificar si el archivo de audio es corrupto
+        try:
+            # Intenta cargar el archivo usando pydub
+            audio = AudioSegment.from_file(file_path)
+            
+            # Alternativamente, puedes usar soundfile para verificar
+            # data, samplerate = sf.read(file_path)
+            
+        except Exception as e:
+            # Si ocurre un error, mostrar un pop up indicando que el archivo está corrupto
+            msg = QtWidgets.QMessageBox()
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setText("Problemas con el audio ingresado!")
+            msg.setInformativeText(str(e))
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return
+        
         Audio.convert_audio_to_wav(file_path)
-        self.showComponents()
+        self.showComponents2()
+
         
     def hideComponents(self):
         self.btnPlay.hide()
         self.labelAcercar.hide()
         self.btnAceptarCaptura.hide()
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: url(./assets/images/microfono-de-estudio.png);")
+    
 
     def pressMicro(self):
         self.showComponents()
@@ -63,6 +83,14 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.pressed.disconnect(self.pressMicro)
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px;image: none;")
         self.btnAlmacenamiento.hide()
+
+    def showComponents2(self):
+        self.btnPlay.show()
+        self.btnAceptarCaptura.show()
+        self.labelSenal.pressed.disconnect(self.pressMicro)
+        self.showMicrophoneImage()
+        self.btnAlmacenamiento.hide()
+
 
     def playbuttonAccept(self):
 
