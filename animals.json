@@ -43,7 +43,7 @@
             "habitat": "Hogares y ciudades de todo el mundo.",
             "dieta": "Omnívoro, se alimenta de carne, vegetales y frutas.",
             "especie": "Canis lupus familiaris",
-            "sonido": "audios/dog/perro.wav"
+            "sonido": "audios/Perro/dog_barking_example1.wav"
         },
         {
             "nombre": "Gato",
@@ -52,7 +52,7 @@
             "habitat": "Hogares y ciudades de todo el mundo.",
             "dieta": "Carnívoro, se alimenta de carne y pescado.",
             "especie": "Felis catus",
-            "sonido": "audios/cat/gato.wav"
+            "sonido": "audios/Gato/cat_meow_example1.wav"
         },
         {
             "nombre": "Gallina",
@@ -61,7 +61,7 @@
             "habitat": "Granjas y corrales de todo el mundo.",
             "dieta": "Omnívoro, se alimenta de semillas, insectos y vegetales.",
             "especie": "Gallus gallus domesticus",
-            "sonido": "audios/chicken/gallina.wav"
+            "sonido": "audios/Gallina/gallina.wav"
         }
     ]
 }

@@ -40,7 +40,9 @@ class Procesamiento:
         return scores
 
     @staticmethod
-    def find_animal(audio_input, Fs):
+    def find_animal(audio_input, Fs=44100):
+
+        print(audio_input)
 
         try:
             database = load(open('database.dat', 'rb'))
@@ -74,7 +76,7 @@ class Procesamiento:
         # If no animal is found
         return None
 
-    @classmethod
+    @staticmethod
     def create_constellation(audio, Fs, window_length=0.5, num_peaks=12):
     
         # Determina si el audio esta en uno o dos canales
@@ -108,8 +110,8 @@ class Procesamiento:
 
         return constellation_map
 
-    @classmethod
-    def create_hashes(cls, constellation_map, id_song=None):
+    @staticmethod
+    def create_hashes(constellation_map, id_song=None):
 
         # Los hash se crean mediante una funcion de combinatoria
         hashes = {}
@@ -122,12 +124,12 @@ class Procesamiento:
                 if not 1 <= diff < 10:
                     continue
 
-                hash = cls.freq_to_hash(freq, other_freq, diff)
+                hash = Procesamiento.freq_to_hash(freq, other_freq, diff)
                 hashes[hash] = (time, id_song)
 
         return hashes
 
-    @classmethod
+    @staticmethod
     def freq_to_hash(freq, other_freq, diff, freq_upper=23_000, freq_bits=10):
 
         freq_binned = freq / freq_upper * (2 ** freq_bits)
