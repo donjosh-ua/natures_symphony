@@ -17,8 +17,10 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.initWindow()
         self.initAction()
         self.show()
-        self.audio_thread = None 
-
+        self.audio_thread = None
+        self.permisos_microfono = False
+        self.permisos_almacenamiento = False
+        
     def initWindow(self):
         self.setWindowTitle("Nature's Symphony")
         self.hideComponents()
@@ -31,6 +33,20 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.btnRegresarPrincipal.clicked.connect(self.pushReturn)
 
     def selectAudioFile(self):
+
+        # Verificar si los permisos ya fueron otorgados
+        if not self.permisos_almacenamiento:
+            # Mostrar ventana emergente para solicitar permisos
+            reply = QtWidgets.QMessageBox.question(self, 'Permiso de Almacenamiento', 
+                                    '¿Permitir acceso al almacenamiento?', 
+                                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            
+            if reply == QtWidgets.QMessageBox.Yes:
+                self.permisos_almacenamiento = True
+            else:
+                self.permisos_almacenamiento = False
+                return  # Salir de la función si no se otorgaron los permisos
+
         file_path, _ = QFileDialog.getOpenFileName(self, "Seleccionar archivo de audio", "", "Audio Files (*.mp3 *.flac *.ogg *.wav *.aac *.wma)") 
         
         if file_path == "" or file_path is None:
@@ -66,15 +82,28 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         self.labelSenal.pressed.connect(self.pressMicro)
         self.showMicrophoneImage()
     
-
     def pressMicro(self):
-        self.showComponents()
+        # Verificar si los permisos ya fueron otorgados
+        if not self.permisos_microfono:
+            # Mostrar ventana emergente para solicitar permisos
+            reply = QtWidgets.QMessageBox.question(self, 'Permiso de Micrófono', 
+                                    '¿Permitir acceso al micrófono?', 
+                                    QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            
+            if reply == QtWidgets.QMessageBox.Yes:
+                self.permisos_microfono = True
+            else:
+                self.permisos_microfono = False
+                return  # Salir de la función si no se otorgaron los permisos
         
-        # Mostrar onda de audio para indicar que se esta comenzando la grabacion del audio
+        # Si los permisos ya fueron otorgados o se acaban de otorgar
+        self.showComponents()
+        # Mostrar onda de audio para indicar que se está comenzando la grabación del audio
         self.labelSenal.startAnimation(5)
-        self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio.grabar_audio, args = ())
+        self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio.grabar_audio, args=())
         self.audio_thread.start()
         QtCore.QTimer.singleShot(5000, self.showMicrophoneImage)
+
     
     def showMicrophoneImage(self):
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px; image: url(./assets/images/microfono-de-estudio.png);")
