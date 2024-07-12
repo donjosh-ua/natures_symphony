@@ -1,7 +1,6 @@
 import threading
 from PyQt5 import QtWidgets, QtCore
 from model.Procesamiento.Audio import Audio
-from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QFileDialog
 from view.Ui_Registro import Ui_Registro
 from controller.Entusiasta.AnimalController import AnimalController
@@ -12,7 +11,9 @@ from pydub import AudioSegment
 class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
     
     def __init__(self):
+
         super().__init__()
+
         self.setupUi(self)
         self.initWindow()
         self.initAction()
@@ -55,11 +56,11 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         # Verificar si el archivo de audio es corrupto
         try:
             # Intenta cargar el archivo usando pydub
-            audio = AudioSegment.from_file(file_path)
+            AudioSegment.from_file(file_path)
             
             # Alternativamente, puedes usar soundfile para verificar
             # data, samplerate = sf.read(file_path)
-            
+         
         except Exception as e:
             # Si ocurre un error, mostrar un pop up indicando que el archivo está corrupto
             msg = QtWidgets.QMessageBox()
@@ -67,6 +68,7 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
             msg.setText("Problemas con el audio ingresado")
             msg.setWindowTitle("Error")
             msg.exec_()
+
             return
         
         Audio.convert_audio_to_wav(file_path)
@@ -98,13 +100,13 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
         
         # Si los permisos ya fueron otorgados o se acaban de otorgar
         self.showComponents()
+
         # Mostrar onda de audio para indicar que se está comenzando la grabación del audio
         self.labelSenal.startAnimation(5)
         self.audio_thread = threading.Thread(name="hilo_secundario", target=Audio.grabar_audio, args=())
         self.audio_thread.start()
         QtCore.QTimer.singleShot(5000, self.showMicrophoneImage)
 
-    
     def showMicrophoneImage(self):
         self.labelSenal.setStyleSheet("background: rgb(170, 255, 127); border-radius: 100px; image: url(./assets/images/microfono-de-estudio.png);")
 
