@@ -10,6 +10,8 @@ from pydub import AudioSegment
 
 class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
     
+    registered_animals = []
+
     def __init__(self):
 
         super().__init__()
@@ -130,16 +132,32 @@ class RegistroController(QtWidgets.QMainWindow, Ui_Registro):
 
     def playbuttonAccept(self):
 
-        if Procesamiento.find_animal(Audio.audio[1]) is None:
+        animal_info = Procesamiento.find_animal(Audio.audio[1])
+        animal_name = animal_info.get("nombre", None)
+
+        print(self.registered_animals)
+        print(f"Animal encontrado: {animal_name}")
+
+        if animal_info is None:
             msg = QtWidgets.QMessageBox()
-            msg.setIcon(QtWidgets.QMessageBox.information)
+            # msg.setIcon(QtWidgets.QMessageBox.information)
             msg.setText("No se han encontrado coincidencias")
             msg.setWindowTitle("Información")
             msg.exec_()
             return
+
+        if animal_name in self.registered_animals:
+            msg = QtWidgets.QMessageBox()
+            # msg.setIcon(QtWidgets.QMessageBox.information)
+            msg.setText(f"Animal \'{animal_name}\' ya registrado")
+            msg.setWindowTitle("Información")
+            msg.exec_()
+            return
         
+        self.registered_animals.append(animal_name)
+
         self.animal_controller = AnimalController()
-        self.animal_controller.set_json_data(Procesamiento.find_animal(Audio.audio[1]))
+        self.animal_controller.set_json_data(animal_info)
 
         # Abrimos la ventana de AnimalController
         self.animal_controller.show()
